@@ -3,7 +3,7 @@
 import datetime
 from datetime import timedelta
 import sys
-import platform
+import socket
 import sys
 import time
 from string import Template
@@ -91,7 +91,7 @@ class Metrics2TSD:
       start = end - timedelta(seconds=seconds_delay)
       ms_start = int(start.strftime('%s')) * 1000
       ms_end = int(end.strftime('%s')) * 1000
-      nodename = platform.node().split('.')[0] # if node() returns the fqdn, the metrics can't be retrieved
+      nodename = socket.getfqdn()
       params = { 'nodes': nodename, 'start': ms_start, 'end': ms_end }
 
       try:
